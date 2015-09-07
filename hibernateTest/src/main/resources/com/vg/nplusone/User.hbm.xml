@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class dynamic-insert="false" dynamic-update="false" 
+         mutable="true" name="com.vg.nplusone.User" optimistic-lock="version" 
+         polymorphism="implicit" select-before-update="false">
+        <id column="user_id" name="userId" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property column="name" name="name" type="java.lang.String" />
+        <property column="age" name="age" type="java.lang.Integer" />
+      
+        <set name="permisions" table="permision" 
+				inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="user_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.vg.nplusone.Permision" />
+        </set>
+  </class>
+  
+</hibernate-mapping>
